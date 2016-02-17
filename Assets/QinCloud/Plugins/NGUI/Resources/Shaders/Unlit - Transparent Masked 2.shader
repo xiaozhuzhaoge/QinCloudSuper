@@ -8,7 +8,7 @@ Shader "Hidden/Unlit/Transparent Masked 2"
 
 	SubShader
 	{
-		LOD 200
+		LOD 100
 
 		Tags
 		{
@@ -94,6 +94,15 @@ Shader "Hidden/Unlit/Transparent Masked 2"
 				col.a *= tex2D(_Mask, IN.texcoord1).a;
 				return col;
 			}
+
+			fixed4 frag (v2f i) : COLOR
+			{
+				fixed4 col;
+				col = tex2D(_MainTex, i.texcoord) * i.color;
+				col.a = col.a * tex2D(_Mask, i.texcoord).a;
+				return col;
+			}
+
 			ENDCG
 		}
 	}

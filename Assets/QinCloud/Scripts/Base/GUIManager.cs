@@ -147,7 +147,7 @@ public class GUIManager : MonoBehaviour {
 
     static void _FloatMessage(string message)
     {
-        UISystem.createObjCallBack(
+        Utility.createObjCallBack(
             GUIManager.instance.messageQueueTable.transform,
             Vector3.one,
             GUIManager.instance.floatMessage.transform.position,

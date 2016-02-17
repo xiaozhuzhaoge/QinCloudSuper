@@ -594,4 +594,400 @@ public class Utility : MonoBehaviour
 		return Convert.ToInt64 (obj);
 	}
 
+    /// <summary>
+    /// 创建单一对象
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="itemPre"></param>
+    /// <param name="switchFlag"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static GameObject createObj(Transform parent, GameObject itemPre, bool switchFlag, string name)
+    {
+        GameObject gameO = (GameObject)GameObject.Instantiate(itemPre);
+        gameO.transform.parent = parent;
+        gameO.transform.localScale = Vector3.one;
+        gameO.transform.localPosition = Vector3.one;
+        gameO.transform.localRotation = Quaternion.identity;
+
+        gameO.SetActive(switchFlag);
+        gameO.name = name;
+        return gameO;
+    }
+    /// <summary>
+    /// 带回调的创建对象
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="scale"></param>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    /// <param name="itemPre"></param>
+    /// <param name="switchFlag"></param>
+    /// <param name="name"></param>
+    /// <param name="callback"></param>
+    public static void createObjCallBack(Transform parent, Vector3 scale, Vector3 position, Quaternion rotation, GameObject itemPre, bool switchFlag, string name, Action<GameObject> callback = null)
+    {
+        GameObject gameO = (GameObject)GameObject.Instantiate(itemPre);
+        gameO.transform.parent = parent;
+        gameO.transform.localScale = scale;
+        gameO.transform.localPosition = position;
+        gameO.transform.localRotation = rotation;
+
+        gameO.SetActive(switchFlag);
+        gameO.name = name;
+        if (callback != null)
+            callback(gameO);
+    }
+
+    /// <summary>
+    /// 创建格子
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="itemPre"></param>
+    /// <param name="switchFlag"></param>
+    /// <param name="name"></param>
+    /// <param name="callback"></param>
+    public static void createObjCallBack(Transform parent, GameObject itemPre, bool switchFlag, string name, Action<GameObject> callback = null)
+    {
+        GameObject gameO = (GameObject)GameObject.Instantiate(itemPre);
+        gameO.transform.parent = parent;
+        gameO.transform.localScale = Vector3.one;
+        gameO.transform.localPosition = Vector3.zero;
+        gameO.transform.localRotation = Quaternion.identity;
+
+        gameO.SetActive(switchFlag);
+        gameO.name = name;
+        if (callback != null)
+            callback(gameO);
+    }
+
+
+
+    /// <summary>
+    /// 生成格子
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="grid"></param>
+    /// <param name="number"></param>
+    /// <param name="itemPre"></param>
+    /// <param name="list"></param>
+    /// <param name="switchFlag"></param>
+    /// <param name="callback"></param>
+    /// 
+    public static void IntilizationBlocks<T>(T grid, int number, GameObject itemPre, List<GameObject> list, bool switchFlag = true, Action<T> callback = null) where T : MonoBehaviour
+    {
+        for (int i = 0; i < number; i++)
+        {
+            list.Add(createObj(grid.transform, itemPre, switchFlag, i.ToString()));
+        }
+        if (callback != null)
+        {
+            callback(grid);
+        }
+    }
+    /// <summary>
+    /// 激活传递GameObjects
+    /// </summary>
+    /// <param name="list"></param>
+    public static void ActiveAllObjects(List<GameObject> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+            list[i].gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 刷新传递的UIGrid
+    /// </summary>
+    /// <param name="grids"></param>
+    public static void ResetAllGrids(UIGrid[] grids)
+    {
+        for (int i = 0; i < grids.Length; i++)
+            grids[i].Reposition();
+    }
+
+    public static void ResetAllScrollView(UIScrollView[] views)
+    {
+        for (int i = 0; i < views.Length; i++)
+            views[i].ResetPosition();
+    }
+
+    public static void UpdateTabs(List<GameObject> tabs, List<GameObject> cTabs)
+    {
+        int cuu = 0;
+        try
+        {
+            cuu = Convert.ToInt32(UICamera.lastHit.collider.name);
+        }
+        catch (Exception exp)
+        {
+            cuu = 1;
+            Debug.Log(exp);
+        }
+        for (int i = 0; i < cTabs.Count; i++)
+        {
+            if (i == cuu)
+                cTabs[i].gameObject.SetActive(true);
+            else
+                cTabs[i].gameObject.SetActive(false);
+        }
+    }
+
+    public static void IntilizationTabs(List<GameObject> tabs, List<GameObject> cTabs, int current)
+    {
+        for (int i = 0; i < cTabs.Count; i++)
+        {
+            if (i == current)
+                cTabs[i].gameObject.SetActive(true);
+            else
+                cTabs[i].gameObject.SetActive(false);
+        }
+
+    }
+
+    public static void RefreshScrollViews(UIScrollView[] sws, int currentIndex)
+    {
+        for (int i = 0; i < sws.Length; i++)
+            sws[i].gameObject.SetActive(false);
+        sws[currentIndex].gameObject.SetActive(true);
+    }
+    public static void SetOriginalStateForScrollViews(UIScrollView[] sws)
+    {
+        for (int i = 0; i < sws.Length; i++)
+            sws[i].ResetPosition();
+    }
+
+
+    public static void ResetGameItemColor(UISprite back)
+    {
+        back.color = Color.white;
+    }
+    /// <summary>
+    /// 右移ScrollView
+    /// </summary>
+    /// <param name="scrollView"></param>
+    /// <param name="grid"></param>
+    public static void rightShiftScrollView(UIScrollView scrollView, UIGrid grid)
+    {
+        float weight = grid.cellWidth;
+        Vector3 currentPosition = scrollView.transform.localPosition;
+        scrollView.transform.localPosition = new Vector3(currentPosition.x + weight, currentPosition.y, currentPosition.z);
+        scrollView.GetComponent<UIPanel>().clipOffset = new Vector3(currentPosition.x + weight, currentPosition.y, currentPosition.z);
+    }
+
+    /// <summary>
+    /// 左移ScrollView
+    /// </summary>
+    /// <param name="scrollView"></param>
+    /// <param name="grid"></param>
+    public static void leftShiftScrollView(UIScrollView scrollView, UIGrid grid)
+    {
+        float weight = grid.cellWidth;
+        Vector3 currentPosition = scrollView.transform.localPosition;
+        scrollView.transform.localPosition = new Vector3(currentPosition.x - weight, currentPosition.y, currentPosition.z);
+        scrollView.GetComponent<UIPanel>().clipOffset = new Vector3(currentPosition.x - weight, currentPosition.y, currentPosition.z);
+    }
+    /// <summary>
+    /// 在Widget上发送射线
+    /// </summary>
+    /// <param name="rayOrignal"></param>
+    /// <param name="camera"></param>
+    /// <param name="rayCollider"></param>
+    /// <returns></returns>
+    public static GameObject RaysEvent(UIWidget rayOrignal, Camera camera, string rayCollider)
+    {
+        Ray center = camera.ScreenPointToRay(camera.WorldToScreenPoint(rayOrignal.transform.position));
+        RaycastHit[] centerContant;
+        centerContant = Physics.RaycastAll(center, 20, 1 << 8);
+        foreach (var o in centerContant)
+            if (o.collider.name == rayCollider)
+                return o.collider.gameObject;
+        return null;
+    }
+
+    /// <summary>
+    /// 设置按键四态
+    /// </summary>
+    /// <param name="button"></param>
+    /// <param name="spriteName"></param>
+    public static void SetAllSpriteForButton(UIButton button, string spriteName)
+    {
+        button.normalSprite = spriteName;
+        button.pressedSprite = spriteName;
+        button.hoverSprite = spriteName;
+        button.disabledSprite = spriteName;
+    }
+
+     /// <summary>
+        /// 查找子节点
+        /// </summary>
+        public static Transform FindDeepChild(GameObject _target, string _childName)
+        {
+            Transform resultTrs = null;
+            resultTrs = _target.transform.Find(_childName);
+            if (resultTrs == null)
+            {
+                foreach (Transform trs in _target.transform)
+                {
+                    resultTrs = Utility.FindDeepChild(trs.gameObject, _childName);
+                    if (resultTrs != null)
+                        return resultTrs;
+                }
+            }
+
+            return resultTrs;
+        }
+
+        /// <summary>
+        /// 查找子节点脚本
+        /// </summary>
+        public static T FindDeepChild<T>(GameObject _target, string _childName) where T : Component
+        {
+            Transform resultTrs = Utility.FindDeepChild(_target, _childName);
+            if (resultTrs != null)
+                return resultTrs.gameObject.GetComponent<T>();
+            return (T)((object)null);
+        }
+
+
+        /// <summary>
+        /// 根据最小depth设置目标所有Panel深度，从小到大
+        /// </summary>
+        /// 
+        private class CompareSubPanels : IComparer<UIPanel>
+        {
+            public int Compare(UIPanel left, UIPanel right)
+            {
+                return left.depth - right.depth;
+            }
+        }
+
+        public static void SetTargetMinPanel(GameObject obj, int depth)
+        {
+            List<UIPanel> lsPanels = GetPanelSorted(obj, true);
+            if (lsPanels != null)
+            {
+                int i = 0;
+                while (i < lsPanels.Count)
+                {
+                    lsPanels[i].depth = depth + i;
+                    i++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获得指定目标最大depth值
+        /// </summary>
+        public static int GetMaxTargetDepth(GameObject obj, bool includeInactive = false)
+        {
+            int minDepth = -1;
+            List<UIPanel> lsPanels = GetPanelSorted(obj, includeInactive);
+            if(lsPanels != null)
+                return lsPanels[lsPanels.Count - 1].depth;
+            return minDepth;
+        }
+
+        /// <summary>
+        /// 返回最大或者最小Depth界面
+        /// </summary>
+        public static GameObject GetPanelDepthMaxMin(GameObject target, bool maxDepth, bool includeInactive)
+        {
+            List<UIPanel> lsPanels = GetPanelSorted(target, includeInactive);
+            if(lsPanels != null)
+            {
+                if (maxDepth)
+                    return lsPanels[lsPanels.Count - 1].gameObject;
+                else
+                    return lsPanels[0].gameObject;
+            }
+            return null;
+        }
+
+        private static List<UIPanel> GetPanelSorted(GameObject target, bool includeInactive = false)
+        {
+            UIPanel[] panels = target.transform.GetComponentsInChildren<UIPanel>(includeInactive);
+            if (panels.Length > 0)
+            {
+                List<UIPanel> lsPanels = new List<UIPanel>(panels);
+                lsPanels.Sort(new CompareSubPanels());
+                return lsPanels;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 添加子节点
+        /// </summary>
+        public static void AddChildToTarget(Transform target, Transform child)
+        {
+            child.parent = target;
+            child.localScale = Vector3.one;
+            child.localPosition = Vector3.zero;
+            child.localEulerAngles = Vector3.zero;
+
+            ChangeChildLayer(child, target.gameObject.layer);
+        }
+
+        /// <summary>
+        /// 修改子节点Layer  NGUITools.SetLayer();
+        /// </summary>
+        public static void ChangeChildLayer(Transform t, int layer)
+        {
+            t.gameObject.layer = layer;
+            for (int i = 0; i < t.childCount; ++i)
+            {
+                Transform child = t.GetChild(i);
+                child.gameObject.layer = layer;
+                ChangeChildLayer(child, layer);
+            }
+        }
+
+        /// <summary>
+        /// 给目标添加Collider背景
+        /// </summary>
+        public static void AddColliderBgToTarget(GameObject target, string maskName, UIAtlas altas, bool isTransparent)
+        {
+            // 添加UIPaneldepth最小上面
+            // 保证添加的Collider放置在屏幕中间
+            Transform windowBg = Utility.FindDeepChild(target, "WindowBg");
+            if (windowBg == null)
+            {
+                GameObject targetParent = GetPanelDepthMaxMin(target, false, true);
+                if (targetParent == null)
+                    targetParent = target;
+
+                windowBg = (new GameObject("WindowBg")).transform;
+                AddChildToTarget(targetParent.transform, windowBg);
+            }
+
+            Transform bg = Utility.FindDeepChild(target, "WindowColliderBg(Cool)");
+            if (bg == null)
+            {
+                // add sprite or widget to ColliderBg gameobject
+                UIWidget widget = null;
+                if (!isTransparent)
+                    widget = NGUITools.AddSprite(windowBg.gameObject, altas, maskName);
+                else
+                    widget = NGUITools.AddWidget<UIWidget>(windowBg.gameObject);
+
+                widget.name = "WindowColliderBg(Cool)";
+                bg = widget.transform;
+                
+                // fill the screen
+                UIStretch stretch = bg.gameObject.AddComponent<UIStretch>();
+                stretch.style = UIStretch.Style.Both;
+                // set relative size bigger
+                stretch.relativeSize = new Vector2(1.5f, 1.5f);
+
+                // set a lower depth
+                widget.depth = -5;
+
+                // set alpha
+                widget.alpha = 0.6f;
+
+                // add collider
+                NGUITools.AddWidgetCollider(bg.gameObject);
+
+            }
+        }
+    
 }

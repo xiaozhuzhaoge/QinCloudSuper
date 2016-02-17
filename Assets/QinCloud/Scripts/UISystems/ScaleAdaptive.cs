@@ -15,7 +15,6 @@ public class ScaleAdaptive : MonoBehaviour
     public FloatType horizontalFloat = FloatType.NONE;
     public FloatType verticalFloat = FloatType.NONE;
 
-	int preFrame = -1;
     Vector2 lastVector;
     Vector3 startVector;
  

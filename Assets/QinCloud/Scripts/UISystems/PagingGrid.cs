@@ -33,7 +33,7 @@ public class PagingGrid : MonoBehaviour {
     [ContextMenu("Execute")]
     void CreateItems()
     {
-        UISystem.IntilizationBlocks(grid, 10, item, items);
+        Utility.IntilizationBlocks(grid, 10, item, items);
     }
 
     public void SetItems(List<GameObject> varb)

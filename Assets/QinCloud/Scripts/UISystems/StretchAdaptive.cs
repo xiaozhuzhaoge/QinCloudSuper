@@ -8,7 +8,6 @@ public class StretchAdaptive : MonoBehaviour
     public bool stretchWidth = true;
 	bool disableParentScale=true;
     public Vector2 overFlow ;
-	int preFrame = -1;
     public float lastUIPanelWidth;
     public float lastUIPanelHeight;
 

@@ -15,14 +15,9 @@ public class GeTools : EditorWindow {
 		window = (GeTools)EditorWindow.GetWindow <GeTools> ("常用文本功能");
 	}
 
-    Vector2 size = new Vector2();
-    Vector2 pos = new Vector2();
     Vector2 spacing = new Vector2(1, 1);
     Vector2 distance = new Vector2(1, 1);
     UIAtlas atlas;
-    string localeId = "";
-    Font font = null;
-    Color color = new Color(0.992156f, 0.909803f, 0.454901f, 1.0f);
     string temp;
 
 	void OnGUI()

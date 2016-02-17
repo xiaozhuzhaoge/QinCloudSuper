@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{BD210198-9247-465C-5613-276FD7B8C973}</ProjectGuid>
+	<ProjectGuid>{2E973C80-337F-B5FA-B738-CA02515D696F}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -172,27 +172,28 @@
      <None Include="Assets\QinCloud\Plugins\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\QinCloud\Plugins\NGUI\Examples\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\QinCloud\Plugins\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
+     <None Include="Assets\QinCloud\Plugins\NGUI\Resources\Shaders\Unlit - Transparnt Colored Mask Shader.shader" />
      <None Include="Assets\QinCloud\Plugins\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\QinCloud\Plugins\NGUI\Examples\Resources\Localization.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/Editor/UnityEditor.UI.dll</HintPath>
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.3/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="ConsolePro.Editor">
- <HintPath>C:/Documents/QinCloud/Assets/QinCloud/Plugins/ConsolePro/Editor/ConsolePro.Editor.dll</HintPath>
+ <HintPath>D:/Documents/QinCloudSuper/Assets/QinCloud/Plugins/ConsolePro/Editor/ConsolePro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Debuger">
- <HintPath>C:/Documents/QinCloud/Assets/QinCloud/Scripts/UISystems/Debuger/Debuger.dll</HintPath>
+ <HintPath>D:/Documents/QinCloudSuper/Assets/QinCloud/Scripts/UISystems/Debuger/Debuger.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{5073FA5F-C1B7-5BF5-F808-AF4179C0C301}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{98A5EEEA-E182-132D-AAD8-1210B4CCC3E2}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
