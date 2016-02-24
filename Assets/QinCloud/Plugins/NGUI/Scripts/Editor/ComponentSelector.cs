@@ -184,7 +184,7 @@ public class ComponentSelector : ScriptableWizard
 
 		if (mObjects == null || mObjects.Length == 0)
 		{
-			EditorGUILayout.HelpBox("No " + GetName(mType) + " components found.\nTry creating a new one.", MessageType.Info);
+			EditorGUILayout.HelpBox("No " + GetName(mType) + " components found.\nTry creating a new one.",MessageType.Info);
 
 			bool isDone = false;
 

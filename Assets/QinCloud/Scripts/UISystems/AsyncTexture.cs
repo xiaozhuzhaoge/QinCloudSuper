@@ -10,8 +10,10 @@ public class AsyncTexture : MonoBehaviour
     public Texture placeholder;
     public UITexture view;
 
-    private static string path = Application.persistentDataPath + "/ImageCache/";  
-    
+    private static string path = CacheFactory.PictureResource;
+    public bool MakePixelPerfect = false;
+    public bool MakeAdapte = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -19,7 +21,16 @@ public class AsyncTexture : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
+        //Zoom out
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            view.width -= 10;
+        }
+        //Zoom in
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            view.width += 10;
+        }
 	}
 
     public AsyncTexture CreateSingleton()
@@ -62,8 +73,10 @@ public class AsyncTexture : MonoBehaviour
         byte[] pngData = image.EncodeToPNG();
         File.WriteAllBytes(path + url.GetHashCode(), pngData);
         texture.mainTexture = image;
+        SetOtherOperations();
         if (callback != null)
             callback();
+        
     }
     //读取网络资源
     IEnumerator LoadLocalImage(string url, UITexture texture, Action callback = null)
@@ -73,14 +86,39 @@ public class AsyncTexture : MonoBehaviour
         WWW www = new WWW(filePath);
         yield return www; 
         texture.mainTexture = www.texture;
+        SetOtherOperations();
         if (callback != null)
             callback();
+        
     }  
 
     [ContextMenu("TestDownload")]
     public void Test()
     {
+        if (view.mainTexture != null)
+            return;
+
         CreateSingleton();
         SetAsyncImage(url, view);
+    }
+
+    void SetOtherOperations()
+    {
+        if(MakePixelPerfect)
+        {
+            view.MakePixelPerfect();
+            if (MakeAdapte)
+            {
+                view.keepAspectRatio = UIWidget.AspectRatioSource.BasedOnWidth;
+                if (view.width >= view.height)
+                {
+                    view.width = Screen.width;
+                }
+                else
+                {
+                    view.height = Screen.height;
+                }
+            }
+        }
     }
 }

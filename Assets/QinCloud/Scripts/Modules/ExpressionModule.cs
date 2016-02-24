@@ -17,9 +17,6 @@ public class ExpressionModule : MonoBehaviour {
 
     void Test()
     {
-        ParameterExpression a = Expression.Parameter(typeof(float), "a");
-        ParameterExpression b = Expression.Parameter(typeof(float), "b");
-        BinaryExpression result = Expression.Add(a, b);
        
     }
 }

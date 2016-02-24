@@ -6,6 +6,8 @@ using SimpleJson;
 
 public class CacheFactory : MonoBehaviour {
 
+    public static CacheFactory instance;
+
     //不同平台下StreamingAssets的路径是不同的，这里需要注意一下。
     public static readonly string PathURL =
 #if UNITY_ANDROID   //安卓
@@ -17,6 +19,14 @@ public class CacheFactory : MonoBehaviour {
 #else
      string.Empty;
 #endif
+
+    public void Awake()
+    {
+        instance = this;
+    }
+
+
+    public static readonly string PictureResource = Application.persistentDataPath + "/ImageCache/";
 
     public enum PictureType{
         JPG,
@@ -58,7 +68,7 @@ public class CacheFactory : MonoBehaviour {
         CreateDir(PathURL);
         string filename = PathURL + prefix;
         System.IO.File.WriteAllBytes(filename, bytes);
-        Debug.Log(string.Format("保存一张图片: {0}", filename));
+        Debug.Log(string.Format("保存一张图片:  {0}", filename));
     }
 
 
@@ -88,5 +98,21 @@ public class CacheFactory : MonoBehaviour {
         }
         return false;
     }
+
+    public void StartLoadPicture(string fileName)
+    {
+        Utility.StartSceneCoroutine<string>(GetLoadResources,fileName);
+    }
+    IEnumerator GetLoadResources(string fileName)
+    {
+        string path = "file:///" + PictureResource + fileName;
+        WWW wwwtexture = new WWW(path);
+        UITexture texture = NGUITools.AddChild<UITexture>(GUIManager.instance.gameObject);
+        yield return wwwtexture;
+        texture.mainTexture = wwwtexture.texture;
+        texture.MakePixelPerfect();
+    }
+
+   
 
 }

@@ -136,12 +136,12 @@ public class GeTools : EditorWindow {
     void ChangeServerUrl()
     {
         TextAsset config = Resources.Load<TextAsset>("config");
-        JsonObject obj = (JsonObject)SimpleJson.SimpleJson.DeserializeObject(Utility.Parse(config.text));
-        obj["host"] = "http://" + serverUrl + "/";
-        File.WriteAllText(Application.dataPath + AssetDatabase.GetAssetPath(config).Substring("Assets".Length), Utility.Serialize(obj.ToString()));
-        Debug.Log("服务器url修改为:" + obj["host"]);
-        AssetDatabase.Refresh();
-        AssetDatabase.SaveAssets();
+        //JsonObject obj = (JsonObject)SimpleJson.SimpleJson.DeserializeObject(Utility.Parse(config.text));
+        //obj["host"] = "http://" + serverUrl + "/";
+        //File.WriteAllText(Application.dataPath + AssetDatabase.GetAssetPath(config).Substring("Assets".Length), Utility.Serialize(obj.ToString()));
+        //Debug.Log("服务器url修改为:" + obj["host"]);
+        //AssetDatabase.Refresh();
+        //AssetDatabase.SaveAssets();
     }
 
     static void PackSoundToPerfab()
@@ -264,7 +264,7 @@ public class GeTools : EditorWindow {
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("ARPG/将文件转换成utf-8 BOM")]
+    [MenuItem("QC/将文件转换成utf-8 BOM")]
     static void UTF_8_BOM()
     {
         Encoding encodingUTF8 = new UTF8Encoding(true);

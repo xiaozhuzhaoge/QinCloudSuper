@@ -79,15 +79,13 @@ public static class SoundManager
 
 	static float GetEffectVolume ()
 	{
-//		Debug.Log ("GetEffectVolume=" + GameManagerSys.effectSValue);
+        Debug.Log ("GetEffectVolume=" + GameManagerSys.SEValue);
         
 		return GameManagerSys.SEValue;
 	}
 
 	static float GetMusicVolume ()
 	{
-//		Debug.Log ("GetMusicVolume=" + GameManagerSys.bgmSValue);
-        
 		return GameManagerSys.BGMValue;
 	}
 

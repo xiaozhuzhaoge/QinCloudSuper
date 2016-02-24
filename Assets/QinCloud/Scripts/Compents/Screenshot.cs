@@ -5,7 +5,7 @@ public class Screenshot : MonoBehaviour {
 
     public GameObject screenImage;
     public static Screenshot instance;
-    public Camera camera;
+    public Camera s_camera;
     void Awake()
     {
         Screenshot.instance = this;
@@ -22,7 +22,7 @@ public class Screenshot : MonoBehaviour {
     [ContextMenu("Test")]
     public void ScreenCameraTrue()
     {
-        screenImage.GetComponent<UITexture>().mainTexture = CaptureCamera(camera, new Rect(Screen.width * 0f, Screen.height * 0f, Screen.width * 1f, Screen.height * 1f));
+        screenImage.GetComponent<UITexture>().mainTexture = CaptureCamera(s_camera, new Rect(Screen.width * 0f, Screen.height * 0f, Screen.width * 1f, Screen.height * 1f));
         screenImage.SetActive(true);
     }
 

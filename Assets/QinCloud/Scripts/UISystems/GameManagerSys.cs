@@ -23,16 +23,21 @@ public class GameManagerSys : MonoBehaviour {
     /// </summary>
     public static float BGMValue = 1f;
 
-    public float sev;
-
-    public float bgmv;
-   
     void Update()
     {
-        SEValue = sev = Mathf.Clamp01(sev);
-        BGMValue = bgmv =  Mathf.Clamp01(bgmv);
+       
     }
 
+
+    public void SetSeValue(float value)
+    {
+        SEValue = Mathf.Clamp01(value);
+    }
+
+    public void SetBGMValue(float value)
+    {
+        BGMValue = Mathf.Clamp01(value);
+    }
 
 	
 }

@@ -18,7 +18,8 @@ public class ConfigFactory {
     public static int fps = 30;
     public static string version;
     public static WorkPlatform platform;
-    public static string host;
+    public static string HttpHost;
+    public static string WebSocketHost;
     /// <summary>
     /// UI Perfabs Cache
     /// </summary>
@@ -33,7 +34,8 @@ public class ConfigFactory {
 	public static void ReadSystemConfig()
 	{
         JsonObject SystemConfigs = (JsonObject)ConfigReader.ReadJsonConfig("Configs/config", null);
-        host = Utility.CTString(SystemConfigs["host"]);
+        HttpHost = Utility.CTString(SystemConfigs["HttpHost"]);
+        WebSocketHost = Utility.CTString(SystemConfigs["WebSocketHost"]);
         version = Utility.CTString(SystemConfigs["version"]);
         fps = Utility.CTInt(SystemConfigs["fps"]);
         platform = (WorkPlatform)Utility.CTInt(SystemConfigs["platform"]);

@@ -25,6 +25,7 @@ public class UITooltip : MonoBehaviour
 	protected Vector3 mSize = Vector3.zero;
 
 	protected UIWidget[] mWidgets;
+    public static bool constant = false;
 
 	/// <summary>
 	/// Whether the tooltip is currently visible.
@@ -63,9 +64,9 @@ public class UITooltip : MonoBehaviour
 		if (mCurrent != mTarget)
 		{
 			mCurrent = Mathf.Lerp(mCurrent, mTarget, RealTime.deltaTime * appearSpeed);
-			if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
-			SetAlpha(mCurrent * mCurrent);
-
+            if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
+            SetAlpha(mCurrent * mCurrent);
+            
 			if (scalingTransitions)
 			{
 				Vector3 offset = mSize * 0.25f;
