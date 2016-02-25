@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LocaleConfig : IConfig
+public class LocaleConfig : ConfigMode
 {
     public int id;
     public string content;
@@ -19,7 +19,7 @@ public class LocaleConfig : IConfig
         Init(o);
     }
 
-    public void Init(SimpleJson.JsonObject o)
+    public override void Init(SimpleJson.JsonObject o)
     {
         this.id = Convert.ToInt32(o ["id"]);
         this.content = Convert.ToString(o["content"]).Replace("\\n", "\n");

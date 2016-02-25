@@ -79,8 +79,6 @@ public static class SoundManager
 
 	static float GetEffectVolume ()
 	{
-        Debug.Log ("GetEffectVolume=" + GameManagerSys.SEValue);
-        
 		return GameManagerSys.SEValue;
 	}
 

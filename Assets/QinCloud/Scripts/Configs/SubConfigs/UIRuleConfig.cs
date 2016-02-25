@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class UIRuleConfig : IConfig {
+public class UIRuleConfig : ConfigMode {
 
     public int id;
     public int uiId;
@@ -15,7 +15,7 @@ public class UIRuleConfig : IConfig {
 
     #region IConfig implementation
 
-    public void Init(SimpleJson.JsonObject o)
+    public override void Init(SimpleJson.JsonObject o)
     {
         this.id = Convert.ToInt32(o["id"]);
         this.uiId = Convert.ToInt32(o["uiId"]);

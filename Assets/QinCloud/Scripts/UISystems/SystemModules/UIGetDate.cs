@@ -6,8 +6,7 @@ using System.Globalization;
 public class UIGetDate : MonoBehaviour {
 
 	// Use this for initialization
-    ChineseLunisolarCalendar calendar = new ChineseLunisolarCalendar();
-   
+  
 	void Start () {
 
 	}
@@ -25,6 +24,11 @@ public class UIGetDate : MonoBehaviour {
     [ContextMenu("GetDate")]
     void GetDate()
     {
-       print(calendar.GetMonth(DateTime.Now));
+        LuaDay day = new LuaDay();
+        Debug.Log(day.GetLunarCalendar(DateTime.Now)[LuaDay.DayType.Day]);
+        string s = "";
+        string a = "";
+        LuaDay.CalcConstellation(DateTime.Now,out s,out a);
+        Debug.Log(s + " " + a);
     }
 }

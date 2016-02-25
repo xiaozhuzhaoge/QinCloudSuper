@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class SoundConfig : IConfig
+public class SoundConfig : ConfigMode
 {
 	public int id;
 	public int type;
@@ -23,13 +23,13 @@ public class SoundConfig : IConfig
 
 	public SoundConfig (SimpleJson.JsonObject o)
 	{
-        Debug.Log(o);
 		Init (o);
 	}
 
-	public void Init (SimpleJson.JsonObject o)
+	public override void Init (SimpleJson.JsonObject o)
 	{
-		this.id = Convert.ToInt32 (o ["id"]);
+        base.Init(o);
+        this.id = Convert.ToInt32(o["id"]);   
 		this.type = Convert.ToInt32 (o ["type"]);        
         this.priority = Convert.ToInt32 (o ["priority"]);
 		this.wholisten = Convert.ToInt32 (o ["wholisten"]);

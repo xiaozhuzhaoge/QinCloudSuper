@@ -31,4 +31,6 @@ public partial class ConfigInfo : MonoBehaviour{
             return _locales;
         }
     }
+
+   
 }

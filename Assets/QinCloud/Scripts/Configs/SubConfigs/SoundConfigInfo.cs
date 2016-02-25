@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
 public partial class ConfigInfo : MonoBehaviour {
 
     Dictionary<int, SoundConfig> _sounds = new Dictionary<int, SoundConfig>();
 
-    static void SoundConfig(List<SoundConfig> list)
+    public static void SoundConfig(List<SoundConfig> list)
     {
-        foreach (var item in list)
-        {
-            ConfigInfo.instance._sounds.Add(item.id, item);
+        for(int i = 0 ; i < list.Count ; i++){
+            ConfigInfo.instance._sounds.Add(list[i].id, list[i]);
         }
     }
 

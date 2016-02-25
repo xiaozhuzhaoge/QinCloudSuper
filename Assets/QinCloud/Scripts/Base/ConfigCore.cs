@@ -39,13 +39,14 @@ public partial class ConfigInfo : MonoBehaviour {
     /// <typeparam name="T">配置文件类型</typeparam>
     /// <param name="configName">配置文件名</param>
     /// <param name="handler">数据链句柄</param>
-    static void RegisterConfigHandler<T>(string configName, Action<List<T>> handler) where T : IConfig, new()
+    static void RegisterConfigHandler<T>(string configName, Action<List<T>> handler) where T : ConfigMode, new()
     {
         configHandlers.Add(configName, (string config) =>
         {
             ConfigReader.ReadArray2Class<T>(configName, false, handler, config);
         });
     }
+
     /// <summary>
     /// 异步加载配置文件句柄
     /// </summary>

@@ -171,7 +171,7 @@ public class GUIManager : MonoBehaviour {
     [ContextMenu("1")]
     public void TestShowGUI1()
     {
-        GUIManager.ShowGUI<UIOne>(UIOne.Instance,"GUIOne");
+        GUIManager.ShowGUI<UIOne>(UIOne.Instance,"UIOne");
     }
     [ContextMenu("2")]
     public void TestShowGUI2()

@@ -108,8 +108,15 @@ public class ConfigReader
 		foreach (var kv in configs) {
             Debug.Log(kv.Key + "  " + kv.Value);
 			string configName = kv.Key;
-			string configPath = (string)(((JsonObject)kv.Value)["path"]);
+            JsonObject o = ((JsonObject)kv.Value);
+			string configPath = (string)(o["path"]);
+            if(o.ContainsKey("ClassName"))
+            {
+                  string configClass = (string)(o["ClassName"]);
+                  classDic.Add(configName,configClass);
+            }
             configsDic.Add(configName, ReadConfig(configPath, null));
+
 		}
 	}
 
@@ -129,4 +136,6 @@ public class ConfigReader
 	{
         configsDic[configName] = config;
 	}
+
+    public static Dictionary<string, string> classDic = new Dictionary<string, string>();
 }
